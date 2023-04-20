@@ -1,0 +1,202 @@
+---
+title: "Evidencia1"
+author: 'Ricardo Camacho Castillo '
+date: "25/4/2021"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE ,results='hide'}
+library("Biostrings")
+library('seqinr')
+library(ggplot2)
+library('stringr')
+if (!require(tidyverse)) install.packages("tidyverse", repos = "https://cloud.r-project.org")
+```
+
+# Evidencia 1: Análisis Inicial COVID-19
+
+En estos momentos, aunque en algunos lugares como Nueva Zelanda, el cual fue considerado como un ejemplo mundial en la lucha contra la pandemia, la situación del COVID-19 está en una situación muy alarmante ya que hasta el día de hoy, domingo 25 de abril de 2021, hemos llegado a la cifra de casi 146 millones de casos, siendo un poco menos de la mitad de ellos, que se originaron de diciembre del año pasado hasta hoy, en aproximadamente 6 meses. Esta cifra es muy significativa, y nos indica que debemos seguirnos cuidando aunque ya esten muy avanzadas las vacunas. 
+
+El siguiente link nos dirige a un mapa, el cual muestra la historia de casos en el mundo, así como de cada continente y de cada país, mostrando casos confirmados, muertes y personas recuperadas.
+
+* [Avance Total COVID-19](https://graphics.reuters.com/CHINA-HEALTH-MAP/0100B59S39M/index.html)
+
+En México tenemos, como en varias partes del mundo, una situación muy grave. Anque las vacunas ya esten llegando y ya las esten empezando a aplicar, todavía seguimos sufriendo muchos contagios. Hasa el día de hoy, hemos llegado 2.326.738 casos, 214.853 muertes y 1.848.177 personas recuperadas. Los casos cada día siguen subiendo, y más porque la gente que ya se vacuno, cree que ya no se va a contagiar y no siguen tomando las medidas necesarias. En el siguiente gráfico se muestran los casos confirmados en México desde el 4 de Marzo de 2020 Hasta el día de hoy. 
+
+![Casos Coronavirus México](coronavirus-data-explorer.png)
+
+De igual manera se muestra esta gráfica en la que se muestra el total de personas vacunadas totalmente en México, y aunque ahorita, ya casi el 4.5% de la población está vacunada, todavía nos falta un largo camino por recorrer.
+
+![Población vacunada totalmente](coronavirus_vaccine.png)
+![Página de las Gráficas](https://ourworldindata.org/explorers/coronavirus-data-explorer?zoomToSelection=true&time=2020-03-01..latest&pickerSort=asc&pickerMetric=location&Metric=People+fully+vaccinated&Interval=7-day+rolling+average&Relative+to+Population=true&Align+outbreaks=false&country=~MEX)
+
+En mi ciudad, de acuerdo a la información de la página del gobierno, específicamente la páagina de vacunación, de la Ciudad de México, y según el periódico El País, de acuerdo a la jefa de Gobierno Claudia Sheinbaum, ha informado que el martes iniciarán con la segunda dosis de la alcaldía Benito Juárez, Cuahutémoc, y Álvaro Obregón, y el viernes terminarán con Iztapalapa y Gustavo A. Madero, pero acaban de anunciar que estas vacunas se aplazarán y solo vacunarán a Gustavo A. Madero. Estas alcaldías son las únicas que faltán, y por ejemplo, en la mía, que es Coyoacán, la campaña de vacunación ya concluyó. 
+
+* [Situación de Vacunas](https://www.elfinanciero.com.mx/cdmx/2021/04/25/gustavo-a-madero-la-unica-nueva-alcaldia-donde-pondran-vacuna-covid-en-cdmx-esta-semana/)
+
+* [Posible Tercera dosis Vacuna](https://expansion.mx/mundo/2021/04/20/pfizer-analiza-una-tercera-dosis-en-su-vacuna-contra-el-covid-19)
+
+## Variante del COVID-19
+
+La primera variante registrada del COVID-19 sucedió, según el Dr. Fernando Castilleja, en Enero del 2020, un mes después de que el virus original haya sido identificado e Wuhan, China. Esta variante fue la D614G, y es la que ha sido más dominante en todo el mundo a lo largo de la pandemia. 
+
+Esta variante, junto con otra identificada como A222V, fueron las primeras nuevas variantes, las cuales tienden a ser las dominantes durante la pandemia. 
+
+Existen otras variantes las cuales han surgido en diferentes partes, las cuales son: 
+
+* **Variante del Reino Unido**
+Se puede indentificar como B.1.1.7 y se caracteriza por tener índices altos de transmisión, más que los de la D614G. Fue detectada por primera vez en Septiembre de 2020.
+  
+* **Variante del Sur de África**
+Se puede indentificar como B.1.35 y comparte algunas mutaciones con el B.1.1.7. Se caracteriza por darle mayor carga viral a los portadores del virus. Fue detectada por primera vez en Octubre de 2020.
+
+* **Variante Brasileña**
+Se puede indentificar como P.1 y tiene mutaciones similares a la de Reino Unido. Esta variante tiene diversas mutaciones que hacen que sea más difícil ser reconocida por los anticuerpos. Fue detectada por primera vez cuando viajeros brasileños llegaron a Japon a principios de Enero de 2021.
+
+* **Variante Danesa**
+  Se puede indentificar como B.1.1.7 y en Junio de 2020, la Cluster5, fue descubierta en una granja danesa de visones.
+  
+  * [Artículo Variantes COVID-19](https://tec.mx/en/news/national/health/new-covid-variants-what-you-should-know)
+  
+Para buscar las variantes del virus en mi país, primero tendría que saber cuales son las que han llegado, y luego, después de saber cuales son, las buscaría en una base de datos como lo es el NCBI, y en artículos científicos, para saber su composición, secuencias e información acerca de las mutaciones que tiene.
+
+El doctor que descubrió por primera vez el COVID-19 fue Li Wenliag, quién quiso advertir acerca de la existencia de este nuevo coronavirus. Intentó alertar a sus colegas médicos diciéndoles que se podría tratar de un nuevo virus parecido al SARS parecido al que provocó una epidemia global en 2003 que descubrió en 7 pacientes.
+
+Se sospechaba que estos casos que descubrió provenían del mercado de pescados y mariscos en Huanan en Wuhan.
+
+Al enterarse las autoridades lo que le había dicho el doctor Li a sus colegas, recibió una visita de los funcionarios de la Oficina de Seguridad Pública los cuales le hicieron firmar una carta en la que lo acusaban de haber perturbado el orden social con los comentarios falsos que había hecho.Ahí le advirtieron que si seguía haciendo ese tipo de comentarios acerca del nuevo posible virus, tendría que ir ante la justicia.
+
+Esto es algo muy lamentable ya que lo obligaron a seguir trabajando con pacientes enfermos, a los cuales contagió por él estar expuesto a los pacientes que tenían el COVID-19. De la misma manera se le agravó mucho la enfermedad y falleció.
+
+Si yo estuviera en su lugar, sabiendo aún así como es el Gobierno Chino, en el cual no hay mucha libertad de expresión y todo el tiempo te están vigilando ya que casi no se tiene privacidad, hubiera tratado de hacerlo público y de alertar a todos, apegandome al juramento Hipocrático, el cual hacen los médicos al recibirse, en el cual se menciona que "aún bajo amenaza no admitiré utilizar mis conocimientos médicos contra leyes de la humanidad", por lo que, pensando en la humanidad, si yo sé que un virus puede llegar a ser peligroso, tengo que informarlo.
+  
+Leer los archivos de cada una de las secuencias de los Virus de Reino Unido, Brasil y Ghana.
+Después se guardan las sequencias en unas variables.
+```{r}
+UK <- read.fasta('UK.fasta')
+Brazil <- read.fasta('Brazil.fasta')
+Ghana<- read.fasta('Ghana.fasta')
+
+seq.UK<- UK$FR993745.1
+seq.Brazil<- Brazil$MW592707.1
+seq.Ghana<- Ghana$MW598408.1
+```
+
+## Longitud de las secuencias
+Para calcular la longitud de las secuencias usamos la función lenght y se la aplicamos a cada una de las secuencias a analizar
+```{r}
+dim_UK<- length(seq.UK)
+sprintf('El tamaño de la secuencia de la Variante de Reindo Unido es de %s',dim_UK)
+
+dim_Brazil<- length(seq.Brazil)
+sprintf('El tamaño de la secuencia de la Variante de Brasil es de %s',dim_Brazil)
+
+dim_Ghana<- length(seq.Ghana)
+sprintf('El tamaño de la secuencia de la Variante de Ghana es de %s',dim_Ghana)
+
+```
+
+## Gráfica secuencia:
+Como no podemos juntar y graficar las secuencias como vectores, ya que para que se pudiera tendrían que tener la misma longitud, procedemos a pasarlas a un DataFrame para poder graficar los valores.
+```{r}
+data.uk<-as.data.frame(table(seq.UK))
+data.Brazil<-as.data.frame(table(seq.Brazil))
+data.Ghana<-as.data.frame(table(seq.Ghana))
+
+
+```
+
+Ya que tenemos las secuencias como DataFrames, procedemos a juntarlas, para así poder graficarlas.Como necesitamos que tengan los mismos nommbres, procedemos primero a darles las mismas etiquetas a cada columna para poder juntarlos, así como también para a cada uno agregarle una columna con la etiqueta de su país.
+```{r}
+data.uk<-cbind(data.uk, pais='UK')
+names(data.uk)<-c('Bases','Cantidad','Pais')
+
+data.brazil<-cbind(data.Brazil, pais='BRA')
+names(data.brazil)<-c('Bases','Cantidad','Pais')
+
+data.ghana<-cbind(data.Ghana, pais='GHA')
+names(data.ghana)<-c('Bases','Cantidad','Pais')
+
+```
+
+Después de tener las mismas etiquetas, procedemos a juntar los dataframes en uno solo.
+```{r}
+variantes<-rbind(data.uk,data.brazil,data.ghana)
+```
+
+Ya que tenemos las secuencias de las variantes juntas, y clasificadas por bases, procedemos a graficarlas.
+```{r}
+ggplot(data = variantes) +
+  geom_col( mapping = aes(Bases,Cantidad, fill = Pais),#eje x y y, así como marcar los datos por colores conforme al país
+            position = position_dodge(width=0.92)) + #posición para que los ponga lado a lado 
+          theme_bw() + #tema gráfica 
+          ggtitle('Gráfica de Comparación de Bases de Variantes del SARS-Cov-2') + #título gráfica
+          scale_fill_manual(values=c("green4", "gold","deepskyblue")) #colores gráfica
+```
+En la gráfica se muestra la cantidad de Adeninas, Guaninas, Citocinas y Timinas que tiene cada una de las variantes del SARS-Cov-2, así como los nucleótidos que hay en la secuencia. En este caso el único que tiene nucleótidos es la variante de Reino Unido. Todos estan muy cerca de la cantidad de cada una de las Bases, lo cual nos indica que sí, son muy parecidos, es decir que provienen del mismo virus y comparten muchas características, así como nos indica el Dr. Fernando Castilleja del Artículo mencionado arriba.
+
+
+## Contenido de GC de cada Variante.
+ Para esta parte usamos la función de GC para poder obtenerlo en cada una de las variantes del virus.
+```{r}
+
+sprintf('El contenido de GC en la secuencia de la variante de Reino Unido es de: %f ',GC(seq.UK))
+
+
+sprintf('El contenido de GC en la secuencia de la variante de Brasil es de: %f ',GC(seq.Brazil))
+
+
+sprintf('El contenido de GC en la secuencia de la variante de Ghana es de: %f',GC(seq.Ghana))
+```
+Entre las uniones GC de una cadena, hay tres puentes de hidrógeno, a diferencia de AT, que sólo tiene 2. Esto nos indica que son cadenas más fuertes y más estables mientras mayor contenido de GC exista en la cadena. Estas secuencias del virus son relativamente estables, y lo curioso es que tienen casi el mismo valor, difieren por algunos decimales, lo cual nos afirma la investigación que hemos hecho acerc de las variantes y podemos decir que estas tres mutaciones comparten muchas carácterísticas entre sí, por eso es que los GC son casi idénticos.
+
+
+## Secuencias complementarias de cada variante.
+Usamos la función que ya teníamos en la tarea uno, para poder obtener la complementaria de cada uno: Algo que podemos recalcar es que la Variante del Reino Unido tiene nucleótidos en su genoma, por lo tanto elegimos un rango del medio para obtener la complementaria.
+```{r}
+get_pair <- function(nucleotid, complementary=FALSE){
+  amino = 'U'
+  if (complementary) {amino = 'T'}
+  switch(nucleotid, 'A'=amino, 't'='a', 'c'='g', 'g'='c', 'a'='t', 'n'='n')
+}
+get_compl <- function(strand){
+  array(sapply(strand, function(x){get_pair(x, TRUE)}))
+}
+
+print('La secuencia complementaria de la variante de Reino Unido es: ')
+get_compl(seq.UK[60:65])
+print('La secuencia complementaria de la variante de Brasil es: ')
+head(get_compl(seq.Brazil))
+print('La secuencia complementaria de la variante de Ghana es: ')
+head(get_compl(seq.Ghana))
+
+
+```
+
+## Conclusión
+
+En este trabajo se tuvo que aprender mucho a manipular los datos, ya que por ejemplo, para la gráfica fue un poco difícil encontrar como graficar todos los datos en una sola gráfica.
+Se tuvo que cambiar a data frames, agregrles filas del país, agregarle nombre a las columnas, para así poder graficarlos. Además de ayudarnos a saber mejor como manipular datos en R, nos hace más conscientes de lo que hemos estado viviendo durante estos ya casi dos últimos años, y nos acerca un poco más a entender que es lo que ocasionó el virus. Podemos entender que hay mutaciones, las cuales, se parecen mucho en sus contenidos de ADN, lo cual nos indica que efectivamente unos vienen de una mutación del otro, y siempre comparten muchas características en común. De igual manera nos presenta la situación que están viviendo otros países, y cómo es que se esta manejando la pandemia, así como también lo que tuvieron que sufrir los primeros doctores que descubrieron este nuevo Coronavirus, que aunque al principio los callaron, y luego les pidieron disculpas, no sirvió mucho, porque por ejemplo Li Wenliag terminó muriendo y contagiando a varias personas. 
+
+
+## Referencias
+
+Quién era Li Wenliang, el doctor Que trató de alertar sobre el coronavirus Y de cuya muerte se cumple UN año. (2020, February 4). BBC News Mundo. https://www.bbc.com/mundo/noticias-internacional-51371640
+
+Seguimiento del nuevo coronavirus. (2020, January 28). Reuters. https://graphics.reuters.com/CHINA-HEALTH-MAP/0100B59S39M/index.html
+
+COVID-19 data explorer. (n.d.). Our World in Data. https://ourworldindata.org/explorers/coronavirus-data-explorer?zoomToSelection=true&time=2020-03-01..latest&pickerSort=asc&pickerMetric=location&Metric=People+fully+vaccinated&Interval=7-day+rolling+average&Relative+to+Population=true&Align+outbreaks=false&country=~MEX
+
+Gustavo A. Madero, la única nueva alcaldía donde pondrán vacuna COVID en CDMX esta semana. (2021, April 25). El Financiero. https://www.elfinanciero.com.mx/cdmx/2021/04/25/gustavo-a-madero-la-unica-nueva-alcaldia-donde-pondran-vacuna-covid-en-cdmx-esta-semana/
+
+New COVID variants: What you should know. (n.d.). Inicio | Tecnológico de Monterrey. https://tec.mx/en/news/national/health/new-covid-variants-what-you-should-know
+
+Pfizer analiza Una tercera dosis en Su vacuna contra el COVID-19. (2021, April 20). Expansión. https://expansion.mx/mundo/2021/04/20/pfizer-analiza-una-tercera-dosis-en-su-vacuna-contra-el-covid-19
+
+
+
